@@ -11,8 +11,7 @@ def add_book():
     publisher = input("Enter publisher name: ")
     quantity = int(input("Enter quantity: "))
 
-    cursor.execute("INSERT INTO Books (Title, Author, Publisher, Quantity) VALUES (%s, %s, %s, %s)", 
-                   (title, author, publisher, quantity))
+    cursor.execute("INSERT INTO Books (Title, Author, Publisher, Quantity) VALUES (%s, %s, %s, %s)", (title, author, publisher, quantity))
     connection.commit()
     print("Book added successfully!")
 
@@ -36,8 +35,7 @@ def add_borrower():
     email = input("Enter email: ")
     phone = input("Enter phone number: ")
 
-    cursor.execute("INSERT INTO Borrowers (Name, Email, PhoneNumber) VALUES (%s, %s, %s)", 
-                   (name, email, phone))
+    cursor.execute("INSERT INTO Borrowers (Name, Email, PhoneNumber) VALUES (%s, %s, %s)", (name, email, phone))
     connection.commit()
     print("Borrower added successfully!")
 
