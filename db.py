@@ -27,7 +27,7 @@ def create_tables():
             BorrowerID INT AUTO_INCREMENT PRIMARY KEY,
             Name VARCHAR(255),
             Email VARCHAR(255),
-            PhoneNumber VARCHAR(15)
+            PhoneNumber VARCHAR(10)
         )
     """)
 
