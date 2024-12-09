@@ -27,6 +27,39 @@ def view_books():
     print(tabulate(books, headers=["BookID", "Title", "Author", "Publisher", "Quantity"]))
     connection.close()
 
+def edit_book():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    book_id = int(input("Enter BookID of the book you want to edit: "))
+
+    # Get current book details
+    cursor.execute("SELECT * FROM Books WHERE BookID = %s", (book_id,))
+    book = cursor.fetchone()
+
+    if book:
+        print(f"Current details: Title: {book[1]}, Author: {book[2]}, Publisher: {book[3]}, Quantity: {book[4]}")
+        
+        title = input(f"Enter new title (current: {book[1]}): ")
+        author = input(f"Enter new author (current: {book[2]}): ")
+        publisher = input(f"Enter new publisher (current: {book[3]}): ")
+        quantity = input(f"Enter new quantity (current: {book[4]}): ")
+
+        # Update book details
+        cursor.execute("""
+            UPDATE Books 
+            SET Title = %s, Author = %s, Publisher = %s, Quantity = %s 
+            WHERE BookID = %s
+        """, (title or book[1], author or book[2], publisher or book[3], int(quantity) if quantity else book[4], book_id))
+
+        connection.commit()
+        print("Book details updated successfully!")
+
+    else:
+        print("Book not found!")
+
+    connection.close()
+
 def add_borrower():
     connection = get_db_connection()
     cursor = connection.cursor()
@@ -49,6 +82,38 @@ def view_borrowers():
     borrowers = cursor.fetchall()
 
     print(tabulate(borrowers, headers=["BorrowerID", "Name", "Email", "PhoneNumber"]))
+    connection.close()
+
+def edit_borrower():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    borrower_id = int(input("Enter BorrowerID of the borrower you want to edit: "))
+
+    # Get current borrower details
+    cursor.execute("SELECT * FROM Borrowers WHERE BorrowerID = %s", (borrower_id,))
+    borrower = cursor.fetchone()
+
+    if borrower:
+        print(f"Current details: Name: {borrower[1]}, Email: {borrower[2]}, Phone: {borrower[3]}")
+
+        name = input(f"Enter new name (current: {borrower[1]}): ")
+        email = input(f"Enter new email (current: {borrower[2]}): ")
+        phone = input(f"Enter new phone number (current: {borrower[3]}): ")
+
+        # Update borrower details
+        cursor.execute("""
+            UPDATE Borrowers 
+            SET Name = %s, Email = %s, PhoneNumber = %s 
+            WHERE BorrowerID = %s
+        """, (name or borrower[1], email or borrower[2], phone or borrower[3], borrower_id))
+
+        connection.commit()
+        print("Borrower details updated successfully!")
+
+    else:
+        print("Borrower not found!")
+
     connection.close()
 
 def issue_book():

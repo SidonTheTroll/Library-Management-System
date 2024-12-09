@@ -6,11 +6,13 @@ def main_menu():
     Library Management System
     1. Add Book
     2. View Books
-    3. Add Borrower
-    4. View Borrowers
-    5. Issue Book
-    6. Return Book
-    7. Exit
+    3. Edit Book
+    4. Add Borrower
+    5. View Borrowers
+    6. Edit Borrower
+    7. Issue Book
+    8. Return Book
+    9. Exit
     """)
 
 def main():
@@ -23,14 +25,18 @@ def main():
         elif choice == "2":
             view_books()
         elif choice == "3":
-            add_borrower()
+            edit_book()
         elif choice == "4":
-            view_borrowers()
+            add_borrower()
         elif choice == "5":
-            issue_book()
+            view_borrowers()
         elif choice == "6":
-            return_book()
+            edit_borrower()
         elif choice == "7":
+            issue_book()
+        elif choice == "8":
+            return_book()
+        elif choice == "9":
             print("Exiting...")
             break
         else:
