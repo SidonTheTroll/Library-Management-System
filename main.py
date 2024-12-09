@@ -1,4 +1,4 @@
-from library_cli import add_book, view_books, add_borrower, view_borrowers, issue_book, return_book
+from library_cli import add_book, view_books, edit_book, add_borrower, view_borrowers, edit_borrower, issue_book, return_book
 from db import create_tables
 
 def main_menu():
